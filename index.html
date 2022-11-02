@@ -1,15 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BuzzQuizz</title>
 
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
-    
+    <header>BuzzQuizz</header>
+
+    <div class="container-app">
+        <div class="page-list-Quizzes">
+            <div class="criar-Quizz">
+                <span>Você não criou nenhum<br> quizz ainda :(</span> 
+                <button>Criar Quizz</button>
+            </div>
+            <div class="Quizzes all">
+                <div class="header">
+                    <h1>Todos os Quizzes</h1>
+                </div>
+                    <div class="list-Quizzes">
+                        <!-- !Implementar pelo JS -->
+                        <div class="container-Quizz">
+                            <img src="imagem/img-teste.png">
+                            <div class="overlay">
+                            <div class="title">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        
+            <!-- !Tela do usuario esta escondida -->
+            <div class="Quizzes User esconder">
+                <div class="header">
+                    <h1>Seus Quizzes</h1>
+                    <button><ion-icon class="add_quizz_icon" name="add-circle"></ion-icon></button>
+                </div>
+                <div class="list-Quizzes">
+                    <!-- !Implementar pelo JS -->
+                    <div class="container-Quizz">
+                        <img src="imagem/img-teste.png">
+                        <div class="overlay">
+                        <div class="title">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
 </body>
 </html>
