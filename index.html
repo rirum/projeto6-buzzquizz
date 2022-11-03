@@ -17,7 +17,7 @@
         <div class="page-list-Quizzes">
             <div class="criar-Quizz">
                 <span>Você não criou nenhum<br> quizz ainda :(</span> 
-                <button>Criar Quizz</button>
+                <button onclick="criarQuizz()">Criar Quizz</button>
             </div>
             <div class="Quizzes all">
                 <div class="header">
@@ -33,12 +33,14 @@
                         </div>
                     </div>
             </div>
+
+            
         
             <!-- !Tela do usuario esta escondida -->
             <div class="Quizzes User esconder">
                 <div class="header">
                     <h1>Seus Quizzes</h1>
-                    <button><ion-icon class="add_quizz_icon" name="add-circle"></ion-icon></button>
+                    <button><ion-icon class="add_quizz_icon" name="add-circle" onclick="criarQuizz()"></ion-icon></button>
                 </div>
                 <div class="list-Quizzes">
                     <!-- !Implementar pelo JS -->
@@ -51,9 +53,29 @@
                 </div>
             </div>
         </div>
-        
-    </div>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+       
+        <!--Tela 3.1 - Info básica do quizz-->
+        <div class="basic-info esconder">
+            <h1>Começe pelo começo</h1>
+            <div class = "container-perguntas">
+                <input type="text" id="title" placeholder="Título do seu quizz"/>
+                <input type="text" id ="url" placeholder="URL da imagem do seu quizz"/>
+                <input type="text" id="number-questions" placeholder="Quantidade de perguntas do quizz"/>
+                <input type="text" id="number-levels" placeholder="Quantidade de níveis do quizz"/>
+            </div>
+            <div class="button-div">
+                <button class="prosseguir" onclick="prosseguirPerguntas()">Prosseguir para criar perguntas</button>
+            </div>
+        </div>
 
+        <!--Tela 3.2 - Perguntas do quizz-->
+        <div class="questions esconder">
+            <h1>Crie suas perguntas</h1>
+         
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
