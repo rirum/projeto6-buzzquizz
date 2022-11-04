@@ -96,7 +96,7 @@ button:active {
     color: #EC362D;
     margin-left: 22px;
 }
-.User button{
+.Quizzes .User button{
     background-color: #fafafa;
     border: none;
 }

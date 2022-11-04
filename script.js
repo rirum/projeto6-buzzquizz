@@ -1,3 +1,148 @@
+/***************************************/                  
+/*       JAVASCRIPT LISTA DE QUIZZES  */
+/*************************************/
+const app = document.querySelector(".container-app");
+buscandoEexibirOsQuizzes();
+ 
+let userQuizzes = [];
+let allQuizzes = [];
+ 
+function buscandoEexibirOsQuizzes(){
+    const requisição = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+ 
+    requisição.then(renderizarEseparar);
+    requisição.catch(erro);
+ 
+}
+// Renderizando e separando os Quizzes
+function renderizarEseparar(resposta){
+    const Qservidor = resposta.data;
+    const Qseparados = separarQDoUser(Qservidor);
+ 
+    userQuizzes = Qseparados.user;
+    allQuizzes = Qseparados.all;
+ 
+    renderizarQuizzes();
+}
+ 
+// Alerta de erro ao carregar
+function erro(){
+    alert("Erro ao buscar quizzes! Por favor, recarregue a página");
+}
+ 
+// Separando os Quizzes do Usuario
+function separarQDoUser(listQuizzes) {
+    const Qseparados = {
+      user: [],
+      all: []
+    };
+ 
+    for (let i = 0; i < listQuizzes.length; i++) {
+      const Quizz = listQuizzes[i];
+ 
+      if (EsteQPertenceAoUser(Quizz)) {
+        Qseparados.user.push(Quizz);
+      } else {
+        Qseparados.all.push(Quizz);
+      }
+    }
+ 
+    return Qseparados;
+  }
+ 
+  function EsteQPertenceAoUser(Quizz) {
+    const userQuizzes = pegarQuizzesDoUser();
+ 
+    for (let i = 0; i < userQuizzes.length; i++) {
+      if (userQuizzes[i].id === container-Quizz.id) {
+        return true;
+      }
+    }
+ 
+    return false;
+  }
+ 
+function pegarQuizzesDoUser (){
+    let dados = localStorage.getItem("Quizzes");
+ 
+    if (dados !== null) {
+      const DadosDeserializados = JSON.parse(dados);
+      return DadosDeserializados;
+    } else {
+      return [];
+    }
+}
+ 
+function renderizarQuizzes(){
+    let userQuizzesHTML = "";
+ 
+    if (userQuizzes.length === 0){
+        userQuizzesHTML = CardCriarQuizz();
+    } else {
+        userQuizzesHTML = CardsQuizzesDoUser();
+    }
+ 
+    let allQuizzesHTML = "";
+    allQuizzes.forEach(function (Quizz) {
+        allQuizzesHTML += gerarCardQuizz(Quizz);
+    });
+   
+    app.innerHTML =  `
+            <div class="page-list-Quizzes">
+            <div class="Quizzes User">
+              ${userQuizzesHTML}
+            </div>
+     
+            <div class="Quizzes all">
+              <div class="header">
+                <h1>Todos os Quizzes</h1>
+              </div>
+              <div class="list-Quizzes">
+                ${allQuizzesHTML}
+              </div>
+            </div>
+          </div>
+        `;
+}
+ 
+function CardCriarQuizz(){
+    return `
+    <div class="criar-Quizz">
+        <span>Você não criou nenhum<br> quizz ainda :(</span>
+        <button onclick="criarQuizz()">Criar Quizz</button>
+    </div>
+  `;
+}
+ 
+function CardsQuizzesDoUser(){
+    let listQuizzes = "";
+ 
+  userQuizzes.forEach(function (Quizz) {
+    listQuizzes += gerarCardQuizz(Quizz);
+  });
+ 
+  return `
+    <div class="header">
+        <h1>Seus Quizzes</h1>
+        <button><ion-icon class="add_quizz_icon" name="add-circle" onclick="criarQuizz()"></ion-icon></button>
+    </div>
+    <div class="list-Quizzes">
+      ${listQuizzes}
+    </div>
+  `;
+}
+ 
+function gerarCardQuizz(Quizz){
+    return `
+        <div class="container-Quizz" onclick="exibirQuizz(${Quizz.id})">
+            <img src="${Quizz.image}">
+            <div class="overlay">
+                <div class="title">${Quizz.title}</div>
+            </div>
+        </div>
+  `;
+}
+
 
 /***************************************/                   
 /*       JAVASCRIPT CRIAR QUIZZ       */
@@ -20,7 +165,7 @@ function criarQuizz(){
     const pageListQuizzes = document.querySelector('.page-list-Quizzes');
     pageListQuizzes.classList.add('esconder');
     const infoBasica = document.querySelector('.basic-info');
-    infoBasica.classList.remove('esconder')
+    infoBasica.classList.remove('esconder');
 
 }
 
