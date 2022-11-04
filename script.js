@@ -92,6 +92,19 @@ function renderizarQuizzes(){
             <div class="Quizzes User">
               ${userQuizzesHTML}
             </div>
+
+            <div class="basic-info esconder">
+                <h1>Começe pelo começo</h1>
+                <div class = "container-perguntas">
+                    <input type="text" id="title" placeholder="Título do seu quizz"/>
+                    <input type="text" id ="url" placeholder="URL da imagem do seu quizz"/>
+                    <input type="text" id="number-questions" placeholder="Quantidade de perguntas do quizz"/>
+                    <input type="text" id="number-levels" placeholder="Quantidade de níveis do quizz"/>
+                </div>
+                <div class="button-div">
+                    <button class="prosseguir" onclick="prosseguirPerguntas()">Prosseguir para criar perguntas</button>
+                </div>
+            </div>
      
             <div class="Quizzes all">
               <div class="header">
@@ -162,11 +175,14 @@ let objQuizz = {title: "",
 
 //Passar da página inicial para a de criar quizz
 function criarQuizz(){
-    const pageListQuizzes = document.querySelector('.page-list-Quizzes');
+    const pageListQuizzes = document.querySelector('.Quizzes.User');
     pageListQuizzes.classList.add('esconder');
+
+    const pageListQuizzesAll = document.querySelector('.Quizzes.all');
+    pageListQuizzesAll.classList.add('esconder');
+
     const infoBasica = document.querySelector('.basic-info');
     infoBasica.classList.remove('esconder');
-
 }
 
 //Passar da tela de informações básicas (3.1) para a de perguntas (3.2)
