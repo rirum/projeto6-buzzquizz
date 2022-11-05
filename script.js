@@ -558,7 +558,7 @@ function verifyQuestionsNumber(){
         alert('Digite um número de perguntas válido!')
         return false
     }
-    if(numberQuestions < 1){
+    if(numberQuestions < 3){
         alert('Seu quizz deve possuir no mínimo 3 perguntas')
         return false
     }
