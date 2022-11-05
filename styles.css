@@ -142,7 +142,7 @@ button:active {
 
 }
 /* CSS CRIAR QUIZZ*/
-.basic-info, .questions{
+.basic-info, .questions, .Nivel{
     padding: 31px 20px;
     width: 100%;
     max-width: 1140px;
@@ -153,7 +153,7 @@ button:active {
     flex-direction: column;
     align-items: center;
 }
-.basic-info h1, .questions h1{
+.basic-info h1, .questions h1, .Nivel h1{
     font-weight: 700;
     font-size: 23px;
     line-height: 27px;
@@ -161,7 +161,7 @@ button:active {
     margin-bottom: 27px;
     text-align: center;
 }
-.container-perguntas input{
+.container-perguntas input, .container-niveis input{
     width: 100%;
     height: 46px;
     font-weight: 400;
@@ -171,9 +171,8 @@ button:active {
     border-radius: 5px;
     padding-left: 20px;
 }
-.container-perguntas input::placeholder{
+input::placeholder{
     font-style: italic;
-   
     color: #BABABA;
 }
 .container-perguntas{
@@ -225,7 +224,7 @@ button:active {
     display: flex;
     align-items: center;
 }
-.numero-pergunta ion-icon{
+.numero-pergunta ion-icon, .numero-nivel ion-icon{
     width: 23px;
     height: 23px;
 }

@@ -8,6 +8,7 @@ let userQuizzes = [];
 let allQuizzes = [];
  
 function buscandoEexibirOsQuizzes(){
+    app.scrollTo(0, 0);
     const requisição = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
  
     requisição.then(renderizarEseparar);
@@ -105,6 +106,14 @@ function renderizarQuizzes(){
                     <button class="prosseguir" onclick="prosseguirPerguntas()">Prosseguir para criar perguntas</button>
                 </div>
             </div>
+
+            <div class="questions esconder">
+            <h1>Crie suas perguntas</h1>
+            </div>
+
+            <div class="Nivel esconder">
+            <h1>Agora, decida os níveis!</h1>
+             </div>
      
             <div class="Quizzes all">
               <div class="header">
@@ -169,9 +178,10 @@ let levelsNumber;
 
 let objQuizz = {title: "",
                 image: "",
+                quantidadeNiveis: 0,
                 questions: [],
                 levels: []
-                }
+                };
 
 //Passar da página inicial para a de criar quizz
 function criarQuizz(){
@@ -197,6 +207,7 @@ function prosseguirPerguntas(){
         urlImage = document.getElementById('url').value;
         questionsNumber = document.getElementById('number-questions').value;
         levelsNumber = document.getElementById('number-levels').value;
+
       
         objQuizz.title = titleQuizz;
         objQuizz.image = urlImage;
@@ -219,7 +230,7 @@ function renderizarPerguntas(numero){
             <h2>Pergunta ${[i]}</h2>
             <ion-icon class="outline" name="create-outline" onclick="expand(this)"></ion-icon>
         </div>
-        <div class ="answers esconder">
+        <div class ="NIVEIS esconder">
             <input id="text${[i]}" type="text" class="title-question first" placeholder="Texto da pergunta"/>
             <input id="color${[i]}" type="text" class="color-question" placeholder="Cor de fundo da pergunta"/>
             <div class="correct">
@@ -264,11 +275,13 @@ function prosseguirNiveis(){
         }
     }
     //Se estiver tudo certo, adiciona as coisas no objQuizz e vai para a criação de níveis
+
     if (valid === true){
         console.log('allvalid')
         criarObj();
         //Ir para a criação de níveis
-        //criarNiveis()
+
+      ExibirCriarNivel();
     }
 }
 
@@ -545,7 +558,7 @@ function verifyQuestionsNumber(){
         alert('Digite um número de perguntas válido!')
         return false
     }
-    if(numberQuestions < 3){
+    if(numberQuestions < 1){
         alert('Seu quizz deve possuir no mínimo 3 perguntas')
         return false
     }
@@ -564,7 +577,13 @@ function verifyLevelsNumber(){
     }
     return true
 }
-
+function expand(icone){
+    const container = icone.parentNode.parentNode;
+    const children = container.children;
+    const firstChild = children.item(1);
+    firstChild.classList.remove('esconder');
+    icone.classList.add('esconder');
+}
 //Mostrar todos os campos para responder ao clicar no ion-icon
 function expand(icone){
     const container = icone.parentNode.parentNode;
@@ -572,4 +591,110 @@ function expand(icone){
     const firstChild = children.item(1);
     firstChild.classList.remove('esconder');
     icone.classList.add('esconder');
+}
+
+
+
+function ExibirCriarNivel(){
+
+    const infoBasica = document.querySelector('.questions');
+    infoBasica.classList.add('esconder');
+    const questions = document.querySelector('.Nivel');
+    questions.classList.remove('esconder');
+    renderizarNivel(levelsNumber);
+}
+
+//Renderizando os niveis
+
+function renderizarNivel(nivel){
+    const containernivel = document.querySelector('.Nivel')
+    for(let i =1; i<= nivel; i++){
+        containernivel.innerHTML += `
+        <div class="container-perguntas niveis ">
+        <div class="numero-pergunta">
+          <h2>Nivel ${[i]}</h2>
+          <ion-icon class="outline" name="create-outline" onclick="expand(this)"></ion-icon>
+        </div>
+        <div class ="answers esconder">
+          <input
+            type="text"
+            class="nivel-${[i]}-titulo"
+            placeholder="Título do nível"
+          />
+          <input
+            type="number"
+            class="nivel-${[i]}-acerto"
+            placeholder="% de acerto mínima"
+          />
+          <input
+            type="text"
+            class="nivel-${[i]}-url"
+            placeholder="URL da imagem do nível"
+          />
+          <input
+            type="text"
+            class="nivel-${[i]}-descricao"
+            placeholder="Descrição do nível"
+          />
+        </div>`
+    }
+    containernivel.innerHTML += 
+    `<div class="button-div">
+    <button class="prosseguir" onclick="finalizarQuizz()">
+        Finalizar Quizz
+    </button>
+    </div>`
+   
+} 
+//Registrando dados dos niveis
+function DadosNiveis() {
+    objQuizz.levels = [];
+ 
+    for (let i = 0; i < objQuizz.levelsNumber; i++) {
+        const nivel = {        
+          title: document.querySelector(`.nivel-${[i]}-titulo`).value,
+          minValue: parseInt(document.querySelector(`.nivel-${[i]}-acerto`).value),
+          Image: document.querySelector(`.nivel-${[i]}-url`).value,
+          text: document.querySelector(`.nivel-${[i]}-descricao`).value
+        };
+ 
+        objQuizz.levels.push(nivel);
+
+      
+    }
+}
+//Validando dados dos niveis
+function validarDadosNiveis() {
+    DadosNiveis();
+    let temNivel0 = false;
+ 
+    for (let i = 0; i < objQuizz.levelslength; i++) {
+        const nivel = objQuizz.levels[i];
+ 
+      if (nivel.minValue === 0) {
+        temNivel0 = true;
+      }
+ 
+      if (nivel.title.length < 10) {
+        return false;
+      } else if (nivel.minValue < 0 || nivel.minValue > 100) {
+        return false;
+      } else if (!validaRURL(nivel.image)) {
+        return false;
+      } else if (nivel.text.length < 30) {
+        return false;
+      }
+    }
+ 
+    return temNivel0;
+}
+// finalizar 
+function finalizarQuizz(){
+    const valido = validarDadosNiveis();
+ 
+  if (!valido) {
+    alert("Preencha os dados corretamente!");
+    return;
+  }
+  salvarQuizz();
 }
