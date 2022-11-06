@@ -501,6 +501,19 @@ function expand(icone){
     const container = icone.parentNode.parentNode;
     const children = container.children;
     const firstChild = children.item(1);
+
+    const expandido = document.querySelector(".expandido");
+
+    if(expandido !== null){
+        expandido.classList.remove("expandido");
+        const containerExpandidoicone = expandido.querySelector("ion-icon")
+        containerExpandidoicone.classList.remove("esconder")
+        const containerExoandidoRespostas = expandido.querySelector(".answers")
+        containerExoandidoRespostas.classList.add("esconder")
+    }
+    container.classList.add("expandido")
+    container.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+    
     firstChild.classList.remove('esconder');
     icone.classList.add('esconder');
 }
@@ -613,15 +626,15 @@ function armazenarId(resposta){
     userQuizzes.push(objeto.id);
     const userQuizzesSerializado = JSON.stringify(userQuizzes);
     localStorage.setItem("id", userQuizzesSerializado);
-    telaSucesso();
+    buscandoEexibirOsQuizzes()
+    telaSucesso(objeto.id);
 }
 
-function telaSucesso(){
+function telaSucesso(id){
     const nivel = document.querySelector('.Nivel');
     nivel.classList.add('esconder');
     const sucess = document.querySelector('.sucesso');
     sucess.classList.remove('esconder');
-
     sucess.innerHTML += 
     `<div class="imagem">
         <img src= ${objQuizz.image} alt="imagem URL do quizz" />
@@ -629,7 +642,7 @@ function telaSucesso(){
         <div class="title">${objQuizz.title}</div>
     </div>
     <div class="button-div">
-        <button onclick="exibirQuizz(${objQuizz.id})" class ="prosseguir">Acessar quizz</button>
+        <button onclick="exibirQuizz(${id})" class ="prosseguir">Acessar quizz</button>
         <p onclick="recarregar()">Voltar pra home</p>
     </div>`;
 }
@@ -761,9 +774,8 @@ function criarDivPageQuizSelecionado(){
 }
 
 function exibirQuizz(quizzId){    
-
-    if(primeiraVezNoQuiz){
-
+    
+    if(primeiraVezNoQuiz){ 
         criarDivPageQuizSelecionado();
 
         for(let i = 0; i < allQuizzes.length; i++){        
@@ -773,9 +785,9 @@ function exibirQuizz(quizzId){
         }    
 
         esconderListaQuizzes();
-
         app.style.backgroundColor = '#e5e5e5'; 
-    }else{
+    }else{ 
+    
         divQuizSelecionado.innerHTML = ``;
     }
 
@@ -789,6 +801,11 @@ function exibirQuizz(quizzId){
 }
 
 function esconderListaQuizzes(){
+    const telaSucesso = document.querySelector(".sucesso");
+    if(!telaSucesso.classList.contains("esconder")){
+        telaSucesso.classList.add("esconder")
+    }
+    
     const pageListQuizzes = document.querySelector('.page-list-Quizzes');
     pageListQuizzes.classList.add('esconder'); 
 }
@@ -952,13 +969,8 @@ function reiniciarQuizz(){
 }
 
 function retornarParaHome(){
-    divQuizSelecionado.innerHTML = ``;
-
-    const pageListQuizzes = document.querySelector('.page-list-Quizzes');
-    pageListQuizzes.classList.remove('esconder'); 
-    app.style.backgroundColor = "#FAFAFA"
-    app.scrollTo(0, 0);
-
+    divQuizSelecionado.innerHTML = ``;   
+    window.location.reload();
     return false;
 }
 
