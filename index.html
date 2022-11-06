@@ -15,22 +15,13 @@
 
     <div class="container-app">
         <div class="page-list-Quizzes">
-            <div class="criar-Quizz">
-                <span>Você não criou nenhum<br> quizz ainda :(</span> 
-                <button onclick="criarQuizz()">Criar Quizz</button>
-            </div>
+            <div class="user"></div>
+            
             <div class="Quizzes all">
                 <div class="header">
                     <h1>Todos os Quizzes</h1>
                 </div>
                     <div class="list-Quizzes">
-                        <!-- !Implementar pelo JS -->
-                        <div class="container-Quizz">
-                            <img src="imagem/img-teste.png">
-                            <div class="overlay">
-                            <div class="title">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
-                            </div>
-                        </div>
                     </div>
             </div>
 
@@ -43,13 +34,13 @@
                     <button><ion-icon class="add_quizz_icon" name="add-circle" onclick="criarQuizz()"></ion-icon></button>
                 </div>
                 <div class="list-Quizzes">
-                    <!-- !Implementar pelo JS -->
-                    <div class="container-Quizz">
+                    
+                  <!--  <div class="container-Quizz">
                         <img src="imagem/img-teste.png">
                         <div class="overlay">
-                        <div class="title">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                            <div class="title">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -73,8 +64,15 @@
             <h1>Crie suas perguntas</h1>
         </div>
 
+        <!--Tela 3.3 - Níveis do quizz-->
         <div class="Nivel esconder">
             <h1>Agora, decida os níveis!</h1>
+        </div>
+
+        <!--Tela 3.4 - Tela de sucesso-->
+        <div class="sucesso esconder">
+            <h1>Seu quizz está pronto!</h1>
+            
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>

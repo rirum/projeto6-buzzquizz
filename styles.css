@@ -40,7 +40,7 @@ header{
 .page-list-Quizzes{
     padding: 31px 20px;
     width: 100%;
-    max-width: 1140px;
+    max-width: 1090px;
     margin: 0 auto;
 }
 .criar-Quizz{
@@ -60,6 +60,7 @@ header{
     line-height: 23px;
     color:#B9B9B9;
     align-items: center;
+    text-align: center;
 }
 .criar-Quizz button{
     width: 151px;
@@ -83,7 +84,7 @@ button:active {
     display: flex;
     flex-direction: column;
 }
-.Quizzes .header{
+.Quizzes .header, .user .header{
     font-size: 20px;
     font-weight: bold;
     margin-top: 40px;
@@ -91,19 +92,24 @@ button:active {
     display: flex;
     align-items: center;
 }
+.user .header{
+    margin-bottom: 10px;
+}
 .add_quizz_icon{
     font-size: 30px;
     color: #EC362D;
     margin-left: 22px;
 }
-.Quizzes .User button{
+.Quizzes .User button, .user button{
     background-color: #fafafa;
     border: none;
 }
 .list-Quizzes{
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    column-gap: 15px;
 }
 .container-Quizz{
     position: relative;
@@ -113,6 +119,7 @@ button:active {
     overflow: hidden;
     margin-bottom: 20px;
     cursor: pointer;
+    display: flex;
 }
 .container-Quizz img{
     width: 100%;
@@ -142,7 +149,7 @@ button:active {
 
 }
 /* CSS CRIAR QUIZZ*/
-.basic-info, .questions, .Nivel{
+.basic-info, .questions, .Nivel, .sucesso{
     padding: 31px 20px;
     width: 100%;
     max-width: 1140px;
@@ -153,7 +160,7 @@ button:active {
     flex-direction: column;
     align-items: center;
 }
-.basic-info h1, .questions h1, .Nivel h1{
+.basic-info h1, .questions h1, .Nivel h1, .sucesso h1{
     font-weight: 700;
     font-size: 23px;
     line-height: 27px;
@@ -244,6 +251,52 @@ input::placeholder{
 } 
 .first{
     margin-top: 6px;
+}
+.imagem{
+   margin-top: 20px;
+    width: 500px;
+    height: 266px;
+    position: relative;
+}
+.imagem img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.sucesso button{
+    margin-bottom: 20px;
+}
+.sucesso p{
+    font-weight: 400;
+    font-size: 21px;
+    margin-bottom: 70px;
+    text-align: center;
+    color: #818181;
+}
+
+.imagem .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.5) 64.58%,
+      #000000 100%
+    );
+  }
+.imagem .title{
+    position: absolute;
+    font-weight: 400;
+    font-size: 23px;
+    padding: 18px;
+    color: #FFFFFF;
+    word-break: break-all;
+    bottom: 10px;
+    z-index: 3;
 }
 
 .esconder{
