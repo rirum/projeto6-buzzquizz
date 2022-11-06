@@ -50,7 +50,7 @@ function comQuizzAddQuizz(){
 function renderizarQuizzes(lista){
     
     if(listaUsuario === null){
-        listQuizzesUser.innerHTML = cardCriarquizz();
+        listQuizzesUser.innerHTML = semQuizzCriarquizz();
         
     } else{
         listQuizzesUser.innerHTML = comQuizzAddQuizz();
