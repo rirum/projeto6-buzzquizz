@@ -50,7 +50,7 @@ function comQuizzAddQuizz(){
 function renderizarQuizzes(lista){
     
     if(listaUsuario === null){
-        // listQuizzesUser.innerHTML = semQuizzCriarQuizz();
+        listQuizzesUser.innerHTML = semQuizzCriarQuizz();
         
     } else{
         listQuizzesUser.innerHTML = comQuizzAddQuizz();
@@ -94,20 +94,6 @@ function cardQuizzServer(quizz){
         </div>`;
 }
     
-
-/***************************************/                   
-/*       JAVASCRIPT ACESSAR QUIZZ       */
-/*************************************/
-
-//BOTAR O CÓDIGO PARA ACESSAR QUIZZ AQUI
-//
-function exibirQuizz(quizzSelecionado){
-
-}
-
-
-
-
 
 /***************************************/                   
 /*       JAVASCRIPT CRIAR QUIZZ       */
@@ -756,7 +742,6 @@ function verifyDescription(nivel){
 /***************************************/                   
 /*       JAVASCRIPT EXIBIR QUIZZ      */
 /*************************************/
-
 let quizzSelecionado;
 let pontuacaoQuizzSelecionado = 0;
 let totalDePerguntas = 0;
