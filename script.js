@@ -52,8 +52,12 @@ function comQuizzAddQuizz(){
 function renderizarQuizzes(lista){
     
     if(listaUsuario === null){
-        listQuizzesUser.innerHTML = semQuizzCriarQuizz();
+        listQuizzesUser.innerHTML = semQuizzCriarquizz();
         
+        for(let i = 0; i < lista.length; i++){
+            const objeto = lista[i]; 
+            listQuizzes.innerHTML += cardQuizzServer(objeto);
+        }
     } else{
         listQuizzesUser.innerHTML = comQuizzAddQuizz();
         const listUser = document.querySelector(".user .list-Quizzes")
@@ -952,7 +956,7 @@ function retornarParaHome(){
 
     const pageListQuizzes = document.querySelector('.page-list-Quizzes');
     pageListQuizzes.classList.remove('esconder'); 
-    
+    app.style.backgroundColor = "#FAFAFA"
     app.scrollTo(0, 0);
 
     return false;
