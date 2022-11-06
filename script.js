@@ -50,7 +50,7 @@ function comQuizzAddQuizz(){
 function renderizarQuizzes(lista){
     
     if(listaUsuario === null){
-        listQuizzesUser.innerHTML = semQuizzCriarquizz();
+        // listQuizzesUser.innerHTML = semQuizzCriarQuizz();
         
     } else{
         listQuizzesUser.innerHTML = comQuizzAddQuizz();
