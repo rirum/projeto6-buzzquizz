@@ -752,3 +752,230 @@ function verifyDescription(nivel){
     }
     return true;
 }
+
+/***************************************/                   
+/*       JAVASCRIPT EXIBIR QUIZZ      */
+/*************************************/
+
+let quizzSelecionado;
+let pontuacaoQuizzSelecionado = 0;
+let totalDePerguntas = 0;
+let quantidadePerguntasRespondidas = 0;
+let divQuizSelecionado;
+let primeiraVezNoQuiz = true;
+
+function criarDivPageQuizSelecionado(){
+    divQuizSelecionado = document.createElement("div");    
+    divQuizSelecionado.classList.add('page-quiz-selecionado');
+}
+
+function exibirQuizz(quizzId){    
+
+    if(primeiraVezNoQuiz){
+
+        criarDivPageQuizSelecionado();
+
+        for(let i = 0; i < allQuizzes.length; i++){        
+            if(quizzId == allQuizzes[i].id){
+                quizzSelecionado = allQuizzes[i];            
+            }
+        }    
+
+        esconderListaQuizzes();
+
+        app.style.backgroundColor = '#e5e5e5'; 
+    }else{
+        divQuizSelecionado.innerHTML = ``;
+    }
+
+    renderizarQuizzSelecionado();
+
+    if(primeiraVezNoQuiz){
+        app.appendChild(divQuizSelecionado);
+    }
+    
+    app.scrollTo(0, 0);
+}
+
+function esconderListaQuizzes(){
+    const pageListQuizzes = document.querySelector('.page-list-Quizzes');
+    pageListQuizzes.classList.add('esconder'); 
+}
+
+function renderizarQuizzSelecionado(){    
+
+    renderizarTituloQuizzSelecionado();
+
+    renderizarPerguntasRespostasQuizzSelecionado();    
+}
+
+function renderizarTituloQuizzSelecionado(){
+    divQuizSelecionado.innerHTML +=  `
+        <div class="container-quiz">
+            <div class="banner-quizz">
+                <img src=${quizzSelecionado.image} alt="">
+                <div class="overlay">
+                    <p>${quizzSelecionado.title}</p>
+                </div>
+            </div>
+        </div>
+    `;    
+}
+
+function renderizarPerguntasRespostasQuizzSelecionado(){   
+
+    quizzSelecionado.questions.forEach((question) => {        
+        criarCardPerguntaQuizzSelecionado(question);
+        totalDePerguntas++;
+    });    
+}
+
+function criarCardPerguntaQuizzSelecionado(question){
+    let divPerguntasRespostas = document.createElement("div");    
+    divPerguntasRespostas.classList.add('perguntas-respostas');    
+
+    let divRespostas = document.createElement("div");    
+    divRespostas.classList.add('respostas');
+    
+    divPerguntasRespostas.innerHTML += `
+            <div class="pergunta" id="div-pergunta" style="background-color:${question.color}"> <p>${question.title}</p></div>
+    `;   
+
+    let respostasRandomizadas = question.answers.sort(randomizarRespostas);    
+
+    respostasRandomizadas.forEach((answer, index) => {
+        divRespostas.innerHTML += `
+            <div class="opcoes" onClick="clicarRespostaQuizzSelecionado(this, ${answer.isCorrectAnswer})" id=${index} data-isCorrectAnswer=${answer.isCorrectAnswer}>
+                <img src=${answer.image} alt="">
+                <p>${answer.text}</p>            
+        `;       
+    });
+
+    divPerguntasRespostas.appendChild(divRespostas);
+    divQuizSelecionado.appendChild(divPerguntasRespostas);    
+}
+
+function clicarRespostaQuizzSelecionado(divSelecionada){
+    const elementosOpcoes = divSelecionada.parentNode.children; 
+
+    const idSelecionado = divSelecionada.id;        
+
+    if(divSelecionada.getAttribute('data-iscorrectanswer') === 'true'){
+        pontuacaoQuizzSelecionado++;
+    }     
+
+    if(!divSelecionada.classList.contains('selecionada')){
+        quantidadePerguntasRespondidas++;
+
+        for(let i = 0; i < elementosOpcoes.length; i++){
+            let child = elementosOpcoes[i];        
+    
+            const respostaCorreta = child.getAttribute('data-iscorrectanswer');    
+    
+            if(idSelecionado != child.id){
+                child.classList.add('opacidade');           
+            }
+            
+            if(respostaCorreta === 'true'){
+                child.classList.add('correta');
+            }else{
+                child.classList.add('errada');
+            }
+    
+            child.classList.add('selecionada')
+        }    
+    
+        if(quantidadePerguntasRespondidas === totalDePerguntas){
+            criarCardResultado();
+        }
+        
+        moverParaProximaPergunta();        
+    }
+}
+
+function moverParaProximaPergunta(){
+    const elementsPergunta = document.getElementsByClassName('pergunta');
+    
+    const intervalId = setInterval(() => {
+        if(quantidadePerguntasRespondidas < totalDePerguntas){        
+            elementsPergunta[quantidadePerguntasRespondidas].scrollIntoView({behavior: 'smooth'});
+        }
+    }, 2000);
+
+    if(quantidadePerguntasRespondidas === totalDePerguntas){        
+        clearInterval(intervalId);
+    }
+}
+
+function criarCardResultado(){
+    const pontuacaoFinal = calcularResultado();
+
+    let levelUsuario;
+
+    quizzSelecionado.levels.forEach((level) => {
+        if(pontuacaoFinal >= level.minValue){
+            levelUsuario = level;
+        }
+    });
+
+    divQuizSelecionado.innerHTML += `
+        <div class="porcentagem-quizz" id="resultado">
+
+            <div class="qtdadeAcertos">
+                <p> ${pontuacaoFinal}% de acerto: ${levelUsuario.title}</p>
+            </div> 
+
+            <div class="imagem-e-texto-final">
+                <div class="imagem-quizz">
+                    <img src=${levelUsuario.image}>
+                </div>
+
+                <div class="texto-final">
+                    <p>${levelUsuario.text}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="botoes-retorno">
+            <button onClick="reiniciarQuizz()">Reiniciar Quizz</button>
+            <a href="#" onclick="retornarParaHome();return false;"><p>Retornar para Home</p></a>
+        </div>
+
+    </div>
+    `;
+
+    const divCardResultado = document.getElementById('resultado');
+    
+    divCardResultado.scrollIntoView({behavior: 'smooth'});
+}
+
+function reiniciarQuizz(){
+    
+    pontuacaoQuizzSelecionado = 0;
+    totalDePerguntas = 0;
+    quantidadePerguntasRespondidas = 0;    
+    primeiraVezNoQuiz = false;
+
+    exibirQuizz();
+}
+
+function retornarParaHome(){
+    divQuizSelecionado.innerHTML = ``;
+
+    const pageListQuizzes = document.querySelector('.page-list-Quizzes');
+    pageListQuizzes.classList.remove('esconder'); 
+    
+    app.scrollTo(0, 0);
+
+    return false;
+}
+
+function calcularResultado(){
+    return Math.ceil((pontuacaoQuizzSelecionado / totalDePerguntas) * 100);
+}
+
+function randomizarRespostas(){
+    return Math.random() - 0.5;
+}
+
