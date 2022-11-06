@@ -26,8 +26,10 @@ function erro(){
     alert("Erro ao buscar quizzes! Por favor, recarregue a página");
 }
 
+let allQuizzes = []
 function receberQuizzes(resposta){
     const todos = resposta.data;
+    allQuizzes = resposta.data
     renderizarQuizzes(todos)
 }
 
