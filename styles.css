@@ -36,6 +36,7 @@ header{
 .container-app{
     position: fixed;
     height: calc(100vh - 70px);
+    margin-bottom: 70px;
     top: 70px;
     width: 100%;
     overflow-y: auto;
