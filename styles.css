@@ -29,6 +29,9 @@ header{
     z-index: 2;
     
 }
+.page-quiz-selecionado{
+    margin-bottom: 70px;
+}
 
 .container-app{
     position: fixed;
@@ -504,5 +507,12 @@ input::placeholder{
         padding-right: 10px;
         width: 100%;
     }
-
+    .imagem{
+        padding: 0px 18px;
+        width: 100%;
+    }
+    .imagem .overlay{
+        left: 18px;
+        width: calc(100% - 36px);
+}
 }

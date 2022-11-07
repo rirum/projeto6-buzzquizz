@@ -83,7 +83,7 @@ function renderizarQuizzes(lista){
 function cardQuizzUser(quizz){
     return  `
                     <div class="container-Quizz" onclick="exibirQuizz(${quizz.id})">
-                        <img src="${quizz.image}">
+                        <img src="${quizz.image}" alt="">
                         <div class="overlay">
             <div class="title">${quizz.title}</div>
                         </div>
@@ -93,7 +93,7 @@ function cardQuizzUser(quizz){
 
 function cardQuizzServer(quizz){
    return `<div class="container-Quizz" onclick="exibirQuizz(${quizz.id})">
-                <img src="${quizz.image}">
+                <img src="${quizz.image}" alt="">
                 <div class="overlay">
                     <div class="title">${quizz.title}</div>
                 </div>
@@ -935,7 +935,7 @@ function criarCardResultado(){
 
             <div class="imagem-e-texto-final">
                 <div class="imagem-quizz">
-                    <img src=${levelUsuario.image}>
+                    <img src=${levelUsuario.image} alt="">
                 </div>
 
                 <div class="texto-final">

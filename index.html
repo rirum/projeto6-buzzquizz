@@ -14,7 +14,7 @@
     <header>BuzzQuizz</header>
 
     <div class="container-app">
-        <div class="page-list-Quizzes">
+        <div class="page-list-Quizzes esconder">
             <div class="user"></div>
             
             <div class="Quizzes all">
@@ -64,9 +64,17 @@
         </div>
 
         <!--Tela 3.4 - Tela de sucesso-->
-        <div class="sucesso esconder">
+        <div class="sucesso">
             <h1>Seu quizz está pronto!</h1>
-            
+            <div class="imagem">
+                <img src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWVIZmhY9N7G-uFgN45APYunYEusNMpKyNtQ&usqp=CAU" alt="imagem URL do quizz" />
+                <div class="overlay"></div>
+                <div class="title">${objQuizz.title}</div>
+            </div>
+            <div class="button-div">
+                <button onclick="exibirQuizz()" class ="prosseguir">Acessar quizz</button>
+                <p onclick="recarregar()">Voltar pra home</p>
+            </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
