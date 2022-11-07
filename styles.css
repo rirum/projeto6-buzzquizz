@@ -100,7 +100,7 @@ button:active {
     color: #EC362D;
     margin-left: 22px;
 }
-.Quizzes .User button, .user button{
+.header button{
     background-color: #fafafa;
     border: none;
 }
@@ -138,13 +138,13 @@ button:active {
       rgba(0, 0, 0, 0.5) 64.58%,
       #000000 100%
     );
-  }
+}
 .container-Quizz .title{
     position: absolute;
     font-size: 18px;
     padding: 18px;
     color: #FFFFFF;
-    word-break: break-all;
+    word-break: break-word;
     margin-top: 110px;
 
 }
@@ -311,55 +311,55 @@ input::placeholder{
     position: absolute; 
 }
 
-.overlay {
+.banner {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 227px;
-    background-image: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(0, 0, 0, 0.5) 64.58%,
-      #000000 100%
-    ); 
+    background-color: rgba(0, 0, 0, 0.57);
 }
 
-.overlay p {
+.banner p {
     font-weight: 400;
     font-size: 39px;
-    line-height: 46px;   
-   align-items: center;
+    line-height: 26px;   
+    align-items: center;
     color: #FFFFFF;
+    padding: 20px;
+    word-break: break-word;
 }
 
-.perguntas-respostas {
+.perguntas-respostas, .porcentagem-quizz{
     width: 759px;
-    height: 650px;
+    height: auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     margin: 0 auto;
     margin-top: 42px;
+    padding: 10px;
     background-color: white;
     
- }
- .pergunta {
-    width: 694px;
+}
+.pergunta, .qtdadeAcertos  {
+    width: 698px;
     height: 138px;
-    background-color: #434CA0;
+    background-color: #EC362D;
     color: #ffffff;
     justify-content: center;
     margin: 0 auto;
     display: flex;
     align-items: center;  
     margin-top: 28px;   
- }
+}
 
-.pergunta p {
+.pergunta p, .qtdadeAcertos p {
     font-size: 23px;
     font-weight: 700;
+    padding: 10px;
+    word-break: break-word;
 }
 
 .respostas {    
@@ -370,8 +370,9 @@ input::placeholder{
 
 .opcoes {
     width: 330px;
-    height: 210px;
-    margin: 10px;    
+    height: auto;
+    margin-top: 20px; 
+    margin-left: 5px;  
 }
 
 .opcoes img {
@@ -383,7 +384,7 @@ input::placeholder{
     margin-bottom: 9px;
     font-size: 20px;
     font-weight: 700;
- }
+}
 
 .correta {
     color: #009C22;
@@ -395,35 +396,6 @@ input::placeholder{
 
 .opacidade {
     opacity: 0.3;
-}
-
-.porcentagem-quizz {
-    width: 759px;
-    height: 500px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    margin: 0 auto;
-    margin-top: 42px;
-    margin-bottom: 57px;
-    background-color: white;
- }
-
-.qtdadeAcertos {
-    width: 694px;
-    height: 138px;
-    background-color: #EC362D;
-    color: #ffffff;
-    justify-content: center;
-    margin: 0 auto;
-    margin-top: 18px;
-    display: flex;
-    align-items: center;
- }
-
-.qtdadeAcertos p {
-    font-size: 23px;
-    font-weight: 700;
 }
 
 .imagem-e-texto-final {
@@ -443,6 +415,7 @@ input::placeholder{
 
 .botoes-retorno {
     text-align: center;
+    margin-top: 40px;
 }
 
 .botoes-retorno button {
@@ -489,4 +462,47 @@ input::placeholder{
     .Quizzes .header{
         justify-content: space-between;
     }
+    .container-Quizz{
+        width: 100%;
+    }
+
+    .Nivel{
+        max-width: 100%;
+    }
+
+    .perguntas-respostas, .porcentagem-quizz{
+        max-width: 100%;
+        
+    }
+    .banner-quizz img, .banner{
+        height: 142px;
+    }
+    .banner p, .pergunta p{
+        font-size: 19px;
+    }
+    .pergunta{
+        height: 89px;
+    }
+    .respostas{
+       width: 100%;
+    }
+    .opcoes {
+        width: 48%;
+        margin-left: 0;
+    }
+    .opcoes p{
+        font-size: 13px;
+    }
+    .imagem-e-texto-final{
+        flex-direction: column;
+    }
+    .imagem-quizz{
+        width: 100%;
+        margin-left: 5px;
+    }
+    .imagem-quizz img{
+        padding-right: 10px;
+        width: 100%;
+    }
+
 }

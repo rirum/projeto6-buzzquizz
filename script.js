@@ -805,7 +805,7 @@ function renderizarTituloQuizzSelecionado(){
         <div class="container-quiz">
             <div class="banner-quizz">
                 <img src=${quizzSelecionado.image} alt="">
-                <div class="overlay">
+                <div class="banner">
                     <p>${quizzSelecionado.title}</p>
                 </div>
             </div>
